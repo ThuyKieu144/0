@@ -1,0 +1,152 @@
+<div class="container mt-5">
+    <h2 *ngIf="sanpham.sp_id">Sửa sản phẩm</h2>
+    <h2 *ngIf="!sanpham.sp_id">Thêm sản phẩm</h2>
+  
+    <form (ngSubmit)="saveProduct()" #productForm="ngForm">
+      <div class="row">
+        <div class="col-md-6">
+            <!-- Tên sản phẩm -->
+            <div class="mb-3">
+                <label for="sp_ten" class="form-label">Tên sản phẩm</label>
+                <input 
+                type="text" 
+                class="form-control" 
+                id="sp_ten"
+                [(ngModel)]="sanpham.sp_ten" 
+                name="sp_ten" 
+                required 
+                #sp_ten="ngModel" 
+                (ngModelChange)="sanpham.sp_ten = sanpham.sp_ten.trim()"
+                />
+                <!-- Thông báo lỗi -->
+                <div *ngIf="(sp_ten.invalid || !sanpham.sp_ten.trim()) && (sp_ten.dirty || sp_ten.touched)" class="text-danger">
+                Vui lòng nhập tên sản phẩm. (không rỗng)
+                </div>
+            </div>
+
+            <!-- Nhà cung cấp -->
+            <div class="mb-3">
+                <label for="sp_nhacungcapid" class="form-label">Nhà cung cấp</label>
+                <select
+                id="sp_nhacungcapid"
+                class="form-control"
+                [(ngModel)]="sanpham.nhacungcap.ncc_id"
+                name="sp_nhacungcapid"
+                required
+                #sp_nhacungcapid="ngModel"
+                (ngModelChange)="sanpham.nhacungcap.ncc_ten = sanpham.nhacungcap.ncc_ten.trim()"
+                >
+                <option value="" disabled selected>Chọn nhà cung cấp</option>
+                <option *ngFor="let supplier of suppliers" [value]="supplier.ncc_id">
+                    {{ supplier.ncc_ten }}
+                </option>
+                </select>
+                <!-- Thông báo lỗi -->
+                <div *ngIf="(sp_nhacungcapid.invalid || !sanpham.nhacungcap.ncc_ten.trim()) && (sp_nhacungcapid.dirty || sp_nhacungcapid.touched)" class="text-danger">
+                Vui lòng chọn nhà cung cấp.
+                </div>
+            </div>
+        
+            <!-- Giá sản phẩm -->
+            <div class="mb-3">
+                <label for="sp_gia" class="form-label">Giá</label>
+                <input 
+                type="number" 
+                class="form-control" 
+                id="sp_gia"
+                [(ngModel)]="sanpham.sp_gia" 
+                name="sp_gia" 
+                required 
+                min="1" 
+                #sp_gia="ngModel" 
+                />
+                <!-- Thông báo lỗi -->
+                <div *ngIf="sp_gia.invalid && (sp_gia.dirty || sp_gia.touched)" class="text-danger">
+                Giá không hợp lệ. Giá phải lớn hơn hoặc bằng 1.
+                </div>
+            </div>
+        
+            <!-- Số lượng tồn kho -->
+            <div class="mb-3">
+                <label for="sp_slton" class="form-label">Số lượng (kg)</label>
+                <input 
+                type="number" 
+                class="form-control" 
+                id="sp_slton"
+                [(ngModel)]="sanpham.sp_slton" 
+                name="sp_slton" 
+                required 
+                min="1" 
+                #sp_slton="ngModel" 
+                />
+                <!-- Thông báo lỗi -->
+                <div *ngIf="sp_slton.invalid && (sp_slton.dirty || sp_slton.touched)" class="text-danger">
+                Số lượng tồn kho không hợp lệ. Số lượng phải lớn hơn hoặc bằng 1.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- Mô tả -->
+            <div class="mb-3">
+                <label for="sp_mota" class="form-label">Mô tả</label>
+                <textarea
+                class="form-control"
+                id="sp_mota"
+                [(ngModel)]="sanpham.sp_mota"
+                name="sp_mota"
+                required
+                #sp_mota="ngModel"
+                (ngModelChange)="sanpham.sp_mota = sanpham.sp_mota.trim()"
+                ></textarea>
+                <!-- Thông báo lỗi -->
+                <div *ngIf="(sp_mota.invalid || !sanpham.sp_mota.trim()) && (sp_mota.dirty || sp_mota.touched)" class="text-danger">
+                Vui lòng nhập mô tả sản phẩm. (không rỗng)
+                </div>
+            </div>
+        
+            <!-- Hình ảnh sản phẩm -->
+            <div class="mb-3">
+              <label for="sp_hinhanh" class="form-label">Hình ảnh sản phẩm</label>
+              <input 
+                  type="file" 
+                  class="form-control" 
+                  id="sp_hinhanh"
+                  (change)="onFileSelected($event)" 
+                  accept="image/*"
+              />
+
+              <div *ngIf="imagePreview; else existingImage"> <!-- Hiển thị ảnh đã chọn nếu có -->
+                  <img [src]="imagePreview" alt="Hình ảnh sản phẩm" class="img-thumbnail mt-2" style="max-height: 150px;">
+              </div>
+              <ng-template #existingImage>
+                  <div *ngIf="sanpham.sp_hinhanh"> <!-- Hiển thị hình ảnh nếu đang sửa -->
+                      <img 
+                          [src]="'http://localhost:8080/sanpham/uploads/' + sanpham.sp_hinhanh" 
+                          alt="{{ sanpham.sp_ten }}" 
+                          style="max-height: 150px;" 
+                          class="img-thumbnail mt-2" 
+                      />
+                  </div>
+              </ng-template>
+              
+              <!-- Thông báo lỗi nếu chưa chọn hình ảnh -->
+              <div *ngIf="!imagePreview && !sanpham.sp_hinhanh && isFormSubmitted" class="text-danger">
+                  Vui lòng chọn hình ảnh cho sản phẩm.
+              </div>
+            </div>
+
+
+            
+        </div>
+      </div>      
+  
+      <!-- Các nút hành động -->
+      <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-success m-2" [disabled]="productForm.invalid">
+          Lưu
+        </button>
+        <a class="btn btn-secondary m-2" [routerLink]="['/admin/products']">Hủy</a>
+      </div>
+    </form>
+  </div>
+  

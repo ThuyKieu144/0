@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="container mt-5">
+    <h2>Chi tiết đơn hàng: {{ orderId }}</h2>
+    <div >
+      <h3 class="mt-4">Danh sách sản phẩm</h3>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Tên sản phẩm</th>
+            <th>Hình ảnh</th>
+            <th>Số lượng (kg)</th>
+            <th>Giá</th>
+            <th>Tổng giá trị</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let ct of ctDonHangs">
+                <td>{{ ct.sanPham.sp_ten }}</td>
+                <td>
+                    <img [src]="'http://localhost:8080/sanpham/uploads/' + ct.sanPham.sp_hinhanh" 
+                         alt="{{ ct.sanPham.sp_ten }}" 
+                         style="width: 100px; height: auto;" />
+                  </td>
+                <td>{{ ct.ctdh_soluong }}</td>
+                <td>{{ ct.ctdh_gia | number }} VNĐ</td>
+                <td>{{ (ct.ctdh_gia * ct.ctdh_soluong) | number }} VNĐ</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" style="text-align: right;"><strong>Tổng Giá Trị Đơn Hàng:</strong></td>
+                <td><strong>{{ getTotalValue() | number }} VNĐ</strong></td> <!-- Total order value -->
+            </tr>
+        </tfoot>
+        
+      </table>
+  
+      <!-- Conditional Buttons Based on Order Status -->
+      <div *ngIf="order.trangthaiDH.trangthaidh_id === 1" class="mt-3">
+        <button style="margin-right: 10px;" class="btn btn-success" (click)="updateTrangThai(orderId, 2)">
+            <i class="fas fa-shipping-fast"></i> Xác nhận đang giao
+          </button>
+          <button class="btn btn-danger" (click)="confirmCancel(orderId)">
+            <i class="fas fa-times-circle"></i> Hủy
+          </button>          
+      </div>
+  
+      <div *ngIf="order.trangthaiDH.trangthaidh_id === 2" class="mt-3">
+        <button class="btn btn-success" (click)="updateTrangThai(orderId, 3)">
+            <i class="fas fa-check-circle"></i> Xác nhận giao hàng thành công
+        </button>
+      </div>
+
+      <button class="btn btn-primary mt-3" (click)="goBack()">
+        <i class="fas fa-arrow-left"></i> Quay lại
+      </button>
+    </div>
+  </div>
+  

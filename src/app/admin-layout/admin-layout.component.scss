@@ -1,0 +1,90 @@
+
+.sortable-column-link {
+    text-decoration: none; /* Loại bỏ gạch chân */
+    color: black; /* Đặt màu đen */
+}
+
+.sortable-column-link:hover {
+    text-decoration: none; /* Giữ nguyên không gạch chân khi hover */
+    color: darkgray; /* Màu thay đổi khi hover (tùy chọn) */
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    height: 60px;
+    width: calc(100% - 250px); /* Width of the navbar, minus the width of the sidebar */
+    margin-left: 250px; /* Push the navbar right to align with the content */
+    background-color: #b4ecbb;
+}
+
+.content {
+    margin-left: 250px; /* Width of the sidebar */
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+    .navbar-brand img {
+        margin-right: 10px;
+    }
+
+
+
+.sidebar {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 250px;
+    background-color: #73dc80;
+    text-align: center;
+}
+
+    .sidebar a {
+        color: black;
+        display: block;
+        padding: 15px;
+        text-decoration: none;
+        font-size: 1.1em;
+        font-weight:bold
+    }
+
+        .sidebar a:hover {
+            background-color: white;
+            color: #ff6a00;
+            font-weight: bold
+        }
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+ul .nav-link {
+    color: black;
+    font-size:1.1em;
+    font-weight:bold;
+}
+
+
+/*Login*/
+
+
+
+
+

@@ -1,0 +1,24 @@
+.login-container {
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay on the image */
+}
+
+.login-form {
+    border-radius: 8px;
+}
+
+.icon {
+    position: absolute;
+    font-size: 1.2rem;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+}
+
+.form-control {
+    padding-left: 40px;
+}
+
+.error-message {
+    font-size: 0.9rem;
+    color: #ff4d4d;
+}

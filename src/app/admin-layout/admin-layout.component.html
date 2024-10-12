@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="sidebar">
+    <div style=" font-weight:bold; font-size:1.2em; color:rgb(0, 0, 0);">
+        <img src="../../assets/img/logo1.png" height="120px" alt="Traicayshop" class="d-inline-block rounded-circle">
+       
+    </div>
+    <a routerLink="/admin/dashboard"><i class="fas fa-tachometer-alt"></i> Trang chủ</a>
+    <a routerLink="/admin/products"><i class="fas fa-box-open"></i> Sản phẩm</a>
+    <a routerLink="/admin/suppliers"><i class="fas fa-truck"></i> Nhà cung cấp</a>
+    <a routerLink="/admin/accounts"><i class="fas fa-user"></i> Tài khoản</a>
+    <a routerLink="/admin/orders"><i class="fas fa-receipt"></i> Đơn hàng</a>
+    <!-- <a routerLink="/admin/statistics"><i class="fas fa-chart-line"></i> Thống kê</a> -->
+</div>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Xin chào, {{ email }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="content">
+    <router-outlet></router-outlet>
+</div>

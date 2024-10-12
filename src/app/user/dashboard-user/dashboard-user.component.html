@@ -1,0 +1,32 @@
+<!-- dashboard-user.component.html -->
+<div class="container">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let sp of filteredSanphams">
+        <div class="card mb-4 shadow-sm">
+          <div class="position-relative Image">
+            <img [src]="'http://localhost:8080/sanpham/uploads/' + sp.sp_hinhanh" 
+                 class="card-img-top" 
+                 alt="{{ sp.sp_ten }}" 
+                 (click)="viewProductDetail(sp.sp_id)">
+          </div>
+          <div class="card-body">
+            <h5 class="card-title" (click)="viewProductDetail(sp.sp_id)">
+              {{ sp.sp_ten }}
+            </h5>
+            <!-- <p class="card-text">{{ sp.sp_mota }}</p> -->
+            <div style="display: flex;">
+              <strong style=" padding-right: 10px;">Giá tiền:</strong>
+              <p class="card-text price">
+                {{ sp.sp_gia | number }} VNĐ
+              </p>
+            </div>
+            <button class="btn btn-primary" (click)="addToCart(sp)"
+                style="margin-top: 10px;">
+                <i class="fas fa-shopping-cart"></i> Thêm giỏ hàng
+              </button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

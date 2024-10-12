@@ -1,0 +1,59 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #ffffff;
+  }
+
+  .container {
+    flex: 1;
+  }
+
+  .navbar {
+    background-color: #b4e0b6;
+    color: black;
+  }
+
+  .nav-link{
+    color: #000000;
+  }
+
+  footer {
+    background-color: #d8f1c7;
+    color: #000000;
+    text-align: center;
+    padding: 10px 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-bar input {
+    margin-right: 10px;
+  }
+
+  .product-filter {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  a{
+    font-size: large;
+    font-weight: bold;
+  }
+  // .dropdown-menu {
+  //   min-width: 200px; /* Thay đổi chiều rộng tối thiểu của dropdown */
+  // }
+  
+  // .dropdown-item-text {
+  //   padding: 0.5rem 1rem; /* Thay đổi khoảng cách cho email */
+  //   font-weight: bold; /* Làm nổi bật email */
+  //   color: #000; /* Đặt màu cho email */
+  //   background-color: #f8f9fa; /* Nền cho email để dễ phân biệt */
+  // }
+  

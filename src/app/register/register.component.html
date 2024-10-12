@@ -1,0 +1,60 @@
+<div class="register-container d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <form class="register-form p-4 shadow-lg rounded bg-white" style="max-width: 400px; width: 100%;">
+    <h2 class="register-title text-center mb-4 text-primary">
+      <i class="fas fa-user-plus"></i> Register
+    </h2>
+    <div class="form-group mb-3">
+      <input
+        type="text"
+        name="username"
+        class="form-control"
+        [(ngModel)]="taiKhoan.taikhoan_ten"
+        placeholder="Username"
+        required
+        #ten="ngModel"
+        (ngModelChange)="taiKhoan.taikhoan_ten = taiKhoan.taikhoan_ten.trim()"
+      />
+    </div>
+    <div *ngIf="!taiKhoan.taikhoan_ten " class="text-danger">
+      Vui lòng nhập tên tài khoản. (không rỗng)
+    </div>
+    <!-- Email Field with Async Validation -->
+    <div class="form-group mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input 
+        type="email" 
+        class="form-control" 
+        [(ngModel)]="taiKhoan.taikhoan_email" 
+        name="taikhoan_email" 
+        required 
+        #email="ngModel"
+        (blur)="checkEmailExists()" 
+        [ngClass]="{ 'is-invalid': email.invalid && (email.dirty || email.touched) }" 
+      />
+      <div *ngIf="!isEmailValid(taiKhoan.taikhoan_email)" class="text-danger">
+        Vui lòng nhập email hợp lệ.
+      </div>
+      <div *ngIf="emailExists" class="text-danger">
+        Email này đã tồn tại. Vui lòng sử dụng email khác.
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        [(ngModel)]="taiKhoan.taikhoan_matkhau"
+        placeholder="Password"
+        required
+      />
+    </div>
+    <div *ngIf="!taiKhoan.taikhoan_matkhau || taiKhoan.taikhoan_matkhau.length < 6" class="text-danger">
+      Mật khẩu phải có ít nhất 6 ký tự.
+    </div>
+    <div class="error-message text-danger text-center mb-3" *ngIf="errorMessage">{{ errorMessage }}</div>
+    <button type="button" class="btn btn-primary w-100" style="margin-top: 20px;" 
+      (click)="onRegister()">Register
+    </button>
+  </form>
+</div>

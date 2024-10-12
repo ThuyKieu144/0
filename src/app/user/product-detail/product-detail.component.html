@@ -1,0 +1,24 @@
+<div *ngIf="sanpham" style="margin-top: 50px;margin-bottom: 100px; display: flex;">
+    <div>
+        <h2>{{ sanpham.sp_ten }}</h2>
+        <img [src]="'http://localhost:8080/sanpham/uploads/' + sanpham.sp_hinhanh"
+            alt="{{ sanpham.sp_ten }}"
+            style="width: 200px; height: auto;">
+    </div>
+    <div style="padding-top: 50px; padding-left: 20px;">
+        <!-- <p>Nhà cung cấp: {{ sanpham.nhacungcap.ncc_ten }}</p> -->
+        <p *ngIf="sanpham.nhacungcap">Nhà cung cấp: {{ sanpham.nhacungcap.ncc_ten }}</p>
+
+        <p>Mô tả sản phẩm: {{ sanpham.sp_mota }}</p>
+        <p style="font-size: large; color: red;">Giá: {{ sanpham.sp_gia | number }} VNĐ</p>
+        <p>Số lượng còn: {{ sanpham.sp_slton }} (kg)</p>
+        <button class="btn btn-primary" (click)="addToCart()">
+            <i class="fas fa-shopping-cart"></i> Thêm giỏ hàng
+        </button>          
+    </div>
+    
+</div>
+
+
+
+  

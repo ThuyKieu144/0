@@ -1,0 +1,83 @@
+<div class="container mt-5">
+  <h2 *ngIf="nhacungcap.ncc_id">Sửa Nhà cung cấp</h2>
+  <h2 *ngIf="!nhacungcap.ncc_id">Thêm Nhà cung cấp</h2>
+
+  <form #nccForm="ngForm" (ngSubmit)="saveNhacungcap()">
+    <!-- Tên nhà cung cấp -->
+    <div class="mb-3">
+      <label for="ten" class="form-label">Tên nhà cung cấp</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        [(ngModel)]="nhacungcap.ncc_ten" 
+        name="ncc_ten" 
+        required 
+        #ten="ngModel" 
+        (ngModelChange)="nhacungcap.ncc_ten = nhacungcap.ncc_ten.trim()"/>
+      <!-- Thông báo lỗi -->
+      <div *ngIf="(ten.invalid || !nhacungcap.ncc_ten.trim()) && (ten.dirty || ten.touched)" class="text-danger">
+        Vui lòng nhập tên nhà cung cấp. (không rỗng)
+
+      </div>
+    </div>
+
+    <!-- Số điện thoại -->
+    <div class="mb-3">
+      <label for="sdt" class="form-label">Số điện thoại</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        [(ngModel)]="nhacungcap.ncc_sdt" 
+        name="ncc_sdt" 
+        required 
+        pattern="^0\d{9}$" 
+        #sdt="ngModel" 
+        title="Số điện thoại phải bắt đầu bằng 0 và có 10 chữ số" />
+      <!-- Thông báo lỗi -->
+      <div *ngIf="sdt.invalid && (sdt.dirty || sdt.touched)" class="text-danger">
+        Số điện thoại không hợp lệ. Vui lòng nhập 10 số và bắt đầu bằng 0.
+      </div>
+    </div>
+
+    <!-- Địa chỉ -->
+    <div class="mb-3">
+      <label for="diachi" class="form-label">Địa chỉ</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        [(ngModel)]="nhacungcap.ncc_diachi" 
+        name="ncc_diachi" 
+        required 
+        #diachi="ngModel" 
+        (ngModelChange)="nhacungcap.ncc_diachi = nhacungcap.ncc_diachi.trim()"/>
+      <!-- Thông báo lỗi -->
+      <div *ngIf="(diachi.invalid || !nhacungcap.ncc_diachi.trim()) && (diachi.dirty || diachi.touched)" class="text-danger">
+        Vui lòng nhập địa chỉ. (không rỗng)
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input 
+        type="email" 
+        class="form-control" 
+        [(ngModel)]="nhacungcap.ncc_email" 
+        name="ncc_email" 
+        required 
+        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" 
+        #email="ngModel" 
+        (ngModelChange)="nhacungcap.ncc_email = nhacungcap.ncc_email.trim()"/>
+      <!-- Thông báo lỗi -->
+      <div *ngIf="(email.invalid|| !nhacungcap.ncc_email.trim()) && (email.dirty || email.touched)" class="text-danger">
+        Email không hợp lệ. Vui lòng nhập đúng định dạng email.
+      </div>
+    </div>    
+
+    <div class="d-flex justify-content-begin">
+      <button type="submit" class="btn btn-success m-2" [disabled]="nccForm.invalid">Lưu</button>
+      <a class="btn btn-secondary m-2" [routerLink]="['/admin/suppliers']">Hủy</a>
+    </div>
+    
+  </form>
+</div>

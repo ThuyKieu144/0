@@ -1,0 +1,15 @@
+  <div *ngIf="orderSuccess && orderDetails" style="margin-top: 50px; margin-bottom: 50px;">
+    <h2>Đặt hàng thành công!</h2>
+    <p>Mã đơn hàng: {{ orderId }}</p>
+    <h3>Thông tin đơn hàng:</h3>
+    <ul *ngIf="orderDetails">
+      <li>Tên khách hàng: {{ orderDetails.dh_tenkh }}</li>
+      <li>Địa chỉ: {{ orderDetails.dh_diachi }}</li>
+      <li>Số điện thoại: {{ orderDetails.dh_sdt }}</li>
+      <li>Email: {{ orderDetails.dh_emailkh }}</li>
+      <li>Ngày đặt: {{ orderDetails.dh_ngaydat | date }}</li>
+      <li>Trạng thái: {{ orderDetails.trangthaiDH.trangthaidh_ten }}</li>
+    </ul>
+  </div>
+  
+  

@@ -1,0 +1,104 @@
+<div class="container mt-5">
+    <h2 *ngIf="taikhoan.taikhoan_id">Sửa Tài khoản</h2>
+    <h2 *ngIf="!taikhoan.taikhoan_id">Thêm Tài khoản</h2>
+
+    <form (ngSubmit)="saveTaiKhoan()" #accountForm="ngForm">
+      <!-- Tên tài khoản -->
+      <div class="mb-3">
+        <label for="ten" class="form-label">Tên tài khoản</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          [(ngModel)]="taikhoan.taikhoan_ten" 
+          name="taikhoan_ten" 
+          required 
+          #ten="ngModel"
+          (ngModelChange)="taikhoan.taikhoan_ten = taikhoan.taikhoan_ten.trim()"
+        />
+        <div *ngIf="!taikhoan.taikhoan_ten " class="text-danger">
+          Vui lòng nhập tên tài khoản. (không rỗng)
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input 
+          type="email" 
+          class="form-control" 
+          [(ngModel)]="taikhoan.taikhoan_email" 
+          name="taikhoan_email" 
+          required 
+          #email="ngModel"
+          (blur)="checkEmailExists()" 
+          [ngClass]="{ 'is-invalid': email.invalid && (email.dirty || email.touched) }" 
+        />
+        <div *ngIf="!isEmailValid(taikhoan.taikhoan_email)" class="text-danger">
+          Vui lòng nhập email hợp lệ.
+        </div>
+        <div *ngIf="emailExists" class="text-danger">
+          Email này đã tồn tại. Vui lòng chọn email khác.
+        </div>
+      </div>
+
+
+       <!-- Mật khẩu -->
+       <div class="mb-3">
+        <label for="matkhau" class="form-label">Mật khẩu</label>
+        <input 
+            type="password" 
+            class="form-control" 
+            [(ngModel)]="taikhoan.taikhoan_matkhau" 
+            name="taikhoan_matkhau" 
+            required 
+            minlength="6" 
+            title="Mật khẩu phải có ít nhất 6 ký tự" 
+            #matkhau="ngModel"
+            (ngModelChange)="taikhoan.taikhoan_matkhau = taikhoan.taikhoan_matkhau.trim()"
+            [ngClass]="{ 'is-invalid': matkhau.invalid && (matkhau.dirty || matkhau.touched) }" 
+        />
+        <div *ngIf="matkhau.invalid && (matkhau.dirty || matkhau.touched)" class="text-danger">
+            Mật khẩu phải có ít nhất 6 ký tự.
+        </div>
+      </div>
+
+      <!-- Confirm Mật khẩu -->
+      <div class="mb-3">
+        <label for="confirmMatkhau" class="form-label">Xác nhận Mật khẩu</label>
+        <input 
+            type="password" 
+            class="form-control" 
+            [(ngModel)]="confirmPassword" 
+            name="confirmPassword" 
+            required 
+            #confirmMatkhau="ngModel"
+            [ngClass]="{ 'is-invalid': confirmMatkhau.invalid && (confirmMatkhau.dirty || confirmMatkhau.touched) || !passwordsMatch() }"
+        />
+        <div *ngIf="!passwordsMatch() && confirmMatkhau.dirty" class="text-danger">
+            Mật khẩu không khớp. Vui lòng nhập lại.
+        </div>
+      </div>
+
+      <!-- Quyền tài khoản -->
+      <div class="mb-3">
+        <label for="quyen" class="form-label">Quyền</label>
+        <select 
+          class="form-select" 
+          [(ngModel)]="taikhoan.quyen.quyen_id" 
+          name="quyen_id" 
+          required>
+          <option value="1">Admin</option>
+          <option value="2">User</option>
+        </select>
+      </div>
+
+      <div class="d-flex justify-content-begin">
+        <!-- Nút Lưu -->
+      <button type="submit" class="btn btn-success m-2" [disabled]="accountForm.invalid || emailExists">
+        Lưu
+      </button>
+
+        <a class="btn btn-secondary m-2" [routerLink]="['/admin/accounts']">Hủy</a>
+      </div>
+    </form>
+</div>

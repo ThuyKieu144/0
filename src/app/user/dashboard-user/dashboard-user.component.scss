@@ -1,0 +1,30 @@
+.container{
+    margin-top: 20px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+    background-color: white;
+    cursor: pointer;
+    flex: 1 1 calc(33.333% - 15px); /* 3 items per row with space between */
+    box-sizing: border-box;
+    padding: 5px 5px
+}
+
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+        width:150px;
+        height: 150px;
+        margin-top:10px;
+        margin-bottom:15px
+    }
+
+    .card .price{
+        color: red;
+    }
